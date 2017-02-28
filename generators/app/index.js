@@ -73,12 +73,12 @@ module.exports = class extends Generator {
     this.npmInstall([
       "cross-env",
       "vizabi/vizabi-tool-bundler",
+      "vizabi",
     ], {
       "save-dev": true,
     });
 
     this.npmInstall([
-      "vizabi",
       // TODO: remove d3 when vizabi will have it as dependency
       "d3",
     ], {
