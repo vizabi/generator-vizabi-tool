@@ -36,7 +36,7 @@ module.exports = class extends Generator {
     ].forEach(this._copyTplWithProps(props, "src"));
 
     this._copyTplWithProps(props, "public")("index.html");
-    this._copyTplWithProps(props)("webpack.config.js");
+    this._copyTplWithProps(props)("bundler.js");
   }
 
   _copyTplWithProps(props, folder = '') {
@@ -63,10 +63,17 @@ module.exports = class extends Generator {
       "vizabi-tool-bundler": "github:vizabi/vizabi-tool-bundler",
     });
 
+    pkg.scripts = Object.assign({}, pkg.scripts, {
+      bundler: "node bundler",
+      build: "npm run bundler",
+      start: "cross-env WATCH=1 npm run bundler"
+    });
+
     this.fs.writeJSON(pkgPath, pkg);
   }
 
   install() {
     this.installDependencies({ bower: false });
+    this.npmInstall(["cross-env"], { "save-dev": true });
   }
 };
