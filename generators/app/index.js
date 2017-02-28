@@ -72,7 +72,7 @@ module.exports = class extends Generator {
   install() {
     this.npmInstall([
       "cross-env",
-      "kuguarpwnz/vizabi-tool-bundler",
+      "vizabi/vizabi-tool-bundler",
     ], {
       "save-dev": true,
     });
