@@ -17,6 +17,11 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    this._configureTemplates();
+    this._configurePackage();
+  }
+
+  _configureTemplates() {
     const { tool } = this.props;
     const toolLower = tool.toLowerCase();
     const props = {
@@ -28,18 +33,18 @@ module.exports = class extends Generator {
       "component.js",
       "index.js",
       "styles.scss",
-    ].forEach(this._copyTplWithProps("src", props));
+    ].forEach(this._copyTplWithProps(props, "src"));
 
-    this._copyTplWithProps("public", props)("index.html");
-
-    this._configurePackage();
+    this._copyTplWithProps(props, "public")("index.html");
+    this._copyTplWithProps(props)("webpack.config.js");
   }
 
-  _copyTplWithProps(folder, props) {
+  _copyTplWithProps(props, folder = '') {
+    folder = folder && `${folder}/`;
     return template => {
       this.fs.copyTpl(
-        this.templatePath(`${folder}/${template}.txt`),
-        this.destinationPath(`${folder}/${template}`),
+        this.templatePath(`${folder}${template}.txt`),
+        this.destinationPath(`${folder}${template}`),
         props
       );
     };
