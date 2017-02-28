@@ -3,10 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "homepage": "http://vizabi.org",
-  "author": {
-    "name": "Vladislav Baranchuk",
-    "email": "kgrpwnz@gmail.com"
-  },
+  "author": "",
   "files": [
     "generators"
   ],
