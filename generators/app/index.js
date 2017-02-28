@@ -33,6 +33,7 @@ module.exports = class extends Generator {
       "component.js",
       "index.js",
       "styles.scss",
+      "template.html",
     ].forEach(this._copyTplWithProps(props, "src"));
 
     this._copyTplWithProps(props, "public")("index.html");
