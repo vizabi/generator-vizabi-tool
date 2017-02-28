@@ -1,2 +1,2 @@
-const bundler = require("vizabi-tool-bundler/build.js");
+const bundler = require("vizabi-tool-bundler");
 bundler("<%= tool %>", __dirname);
