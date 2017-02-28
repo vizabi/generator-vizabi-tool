@@ -1,0 +1,29 @@
+const <%= tool %> = Vizabi.Component.extend({
+
+  init(config, context) {
+    this.name = '<%= toolLower %>-component';
+    this.template = require('./template.html');
+
+    this.model_expects = [];
+
+    this.model_binds = {};
+
+    this._super(config, context);
+  },
+
+  readyOnce() {
+
+  },
+
+
+  ready() {
+
+  },
+
+  resize() {
+
+  }
+
+});
+
+export default <%= tool %>;

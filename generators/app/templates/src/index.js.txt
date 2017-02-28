@@ -1,0 +1,17 @@
+import "./styles.scss";
+import component from "./component";
+
+export default Vizabi.Tool.extend("<%= tool %>", {
+
+  init(placeholder, externalModel) {
+
+    this.name = "<%= toolLower %>";
+
+    this.components = [];
+
+    this._super(placeholder, externalModel);
+  },
+
+  default_model: {}
+
+});
