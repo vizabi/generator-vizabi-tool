@@ -11,7 +11,7 @@ module.exports = class extends Generator {
       {
         type: "input",
         name: "tool",
-        message: "Please enter tool name in UpperCamelCase."
+        message: `Please enter tool name in ${chalk.green("UpperCamelCase")}.`
       }
     ]).then(p => this.props = p);
   }
@@ -55,7 +55,7 @@ module.exports = class extends Generator {
     });
 
     pkg.devDependencies = Object.assign({}, pkg.devDependencies, {
-      "vizabi-tool-bundler": "github:kuguarpwnz/vizabi-tool-bundler",
+      "vizabi-tool-bundler": "github:vizabi/vizabi-tool-bundler",
     });
 
     this.fs.writeJSON(pkgPath, pkg);
