@@ -60,10 +60,6 @@ module.exports = class extends Generator {
       vizabi: "*",
     });
 
-    pkg.devDependencies = Object.assign({}, pkg.devDependencies, {
-      "vizabi-tool-bundler": "github:vizabi/vizabi-tool-bundler",
-    });
-
     pkg.scripts = Object.assign({}, pkg.scripts, {
       bundler: "node bundler",
       build: "npm run bundler",
@@ -74,7 +70,21 @@ module.exports = class extends Generator {
   }
 
   install() {
+    this.npmInstall([
+      "cross-env",
+      "kuguarpwnz/vizabi-tool-bundler",
+    ], {
+      "save-dev": true,
+    });
+
+    this.npmInstall([
+      "vizabi",
+      // TODO: remove d3 when vizabi will have it as dependency
+      "d3",
+    ], {
+      save: true,
+    });
+
     this.installDependencies({ bower: false });
-    this.npmInstall(["cross-env"], { "save-dev": true });
   }
 };
