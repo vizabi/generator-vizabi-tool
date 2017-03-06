@@ -1,2 +1,0 @@
-const bundler = require("vizabi-tool-bundler")("<%= tool %>", "<%= toolLower %>", __dirname);
-bundler[process.env.WATCH ? "watch" : "build"]();

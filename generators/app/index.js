@@ -36,7 +36,6 @@ module.exports = class extends Generator {
       "template.html",
     ].forEach(this._copyTplWithProps(props, "src"));
 
-    this._copyTplWithProps(props, "public")("index.html");
     this._copyTplWithProps(props)("bundler.js");
   }
 
@@ -56,14 +55,9 @@ module.exports = class extends Generator {
     const pkgPath = this.destinationPath("package.json");
     const pkg = this.fs.readJSON(pkgPath, {});
 
-    pkg.peerDependencies = Object.assign({}, pkg.peerDependencies, {
-      vizabi: "*",
-    });
-
     pkg.scripts = Object.assign({}, pkg.scripts, {
-      bundler: "node bundler",
-      build: "npm run bundler",
-      start: "cross-env WATCH=1 npm run bundler"
+      preinstall: "npm link ../vizabi",
+      build: "webpack --progress",
     });
 
     this.fs.writeJSON(pkgPath, pkg);
@@ -71,20 +65,9 @@ module.exports = class extends Generator {
 
   install() {
     this.npmInstall([
-      "cross-env",
-      "vizabi/vizabi-tool-bundler",
-      "vizabi",
+      "vizabi/vizabi-tool-bundler"
     ], {
       "save-dev": true,
     });
-
-    this.npmInstall([
-      // TODO: remove d3 when vizabi will have it as dependency
-      "d3",
-    ], {
-      save: true,
-    });
-
-    this.installDependencies({ bower: false });
   }
 };
