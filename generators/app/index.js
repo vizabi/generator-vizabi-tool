@@ -13,7 +13,10 @@ module.exports = class extends Generator {
         name: "tool",
         message: `Please enter tool name in ${chalk.green("UpperCamelCase")}.`
       }
-    ]).then(p => this.props = p);
+    ]).then(props => {
+      Object.assign(props, { toolLower: props.tool.toLowerCase() });
+      Object.assign(this, { props });
+    });
   }
 
   writing() {
@@ -22,12 +25,7 @@ module.exports = class extends Generator {
   }
 
   _configureTemplates() {
-    const { tool } = this.props;
-    const toolLower = tool.toLowerCase();
-    const props = {
-      tool,
-      toolLower,
-    };
+    const { props } = this;
 
     [
       "component.js",
@@ -36,7 +34,8 @@ module.exports = class extends Generator {
       "template.html",
     ].forEach(this._copyTplWithProps(props, "src"));
 
-    this._copyTplWithProps(props)("bundler.js");
+    this._copyTplWithProps()("webpack.config.js");
+    this._copyTplWithProps(props)("webpack.external.js");
   }
 
   _copyTplWithProps(props, folder = '') {
@@ -51,12 +50,13 @@ module.exports = class extends Generator {
   }
 
   _configurePackage() {
-
     const pkgPath = this.destinationPath("package.json");
     const pkg = this.fs.readJSON(pkgPath, {});
 
+    pkg.main = `build/dist/${this.props.toolLower}.js`;
+
     pkg.scripts = Object.assign({}, pkg.scripts, {
-      preinstall: "npm link ../vizabi",
+      link: "npm link ../vizabi",
       build: "webpack --progress",
     });
 
