@@ -55,6 +55,8 @@ module.exports = class extends Generator {
 
     pkg.main = `build/dist/${this.props.toolLower}.js`;
 
+    pkg.files = ["build/dist"];
+    
     pkg.scripts = Object.assign({}, pkg.scripts, {
       link: "npm link ../vizabi",
       build: "webpack --progress",
