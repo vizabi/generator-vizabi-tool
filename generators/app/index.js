@@ -59,7 +59,7 @@ module.exports = class extends Generator {
     
     pkg.scripts = Object.assign({}, pkg.scripts, {
       link: "npm link ../vizabi",
-      build: "webpack --progress",
+      build: "cross-env NODE_ENV=production webpack --progress",
     });
 
     this.fs.writeJSON(pkgPath, pkg);
@@ -67,7 +67,8 @@ module.exports = class extends Generator {
 
   install() {
     this.npmInstall([
-      "vizabi/vizabi-tool-bundler"
+      "vizabi/vizabi-tool-bundler",
+      "cross-env",
     ], {
       "save-dev": true,
     });
