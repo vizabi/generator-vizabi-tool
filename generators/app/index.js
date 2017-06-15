@@ -53,10 +53,12 @@ module.exports = class extends Generator {
     const pkgPath = this.destinationPath("package.json");
     const pkg = this.fs.readJSON(pkgPath, {});
 
-    pkg.main = `build/dist/${this.props.toolLower}.js`;
+    pkg.name = `vizabi-${this.props.toolLower}`;
 
-    pkg.files = ["build/dist"];
-    
+    pkg.main = `build/${this.props.toolLower}.js`;
+
+    pkg.files = ["build"];
+
     pkg.scripts = Object.assign({}, pkg.scripts, {
       link: "npm link ../vizabi",
       build: "cross-env NODE_ENV=production webpack --progress",
