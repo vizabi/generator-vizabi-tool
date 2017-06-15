@@ -6,11 +6,11 @@ First, install [Yeoman](http://yeoman.io) and generator-vizabi-tool using [npm](
 
 ```bash
 npm install -g yo
-npm install -g generator-vizabi-tool
 ```
 
 Then generate your new project:
 
+Clone this repo and run
 ```bash
-yo vizabi-tool
+yo <path to generator>/generators/app/
 ```
