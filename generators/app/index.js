@@ -71,6 +71,7 @@ module.exports = class extends Generator {
     this.npmInstall([
       "vizabi/vizabi-tool-bundler",
       "cross-env",
+      "vizabi"
     ], {
       "save-dev": true,
     });
